@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official Beauty Quality Control Program Philippines in partnership with Watsons, SM Beauty, and Beauty Bar.">
-    <meta property="og:title" content="Quality Connect Program">
-    <meta property="og:type" content="website">
-    <title>Quality Connect - Program Details</title>
+    <meta name="description" content="Official Beauty Quality Control Program for the Madagascar Centella Travel Kit.">
+    <title>Quality Connect - Madagascar Centella Program</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f5f7fa;
+            background-color: #f8fbf9;
             margin: 0;
             padding: 20px;
             color: #333;
@@ -19,88 +17,96 @@
             max-width: 900px;
             margin: auto;
         }
-        .header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 40px;
+        .hero {
+            background: white;
             border-radius: 18px;
-            text-align: center;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
             margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
         }
-        .header h1 {
-            margin: 0;
-            font-size: 32px;
+        .hero-content {
+            flex: 1;
         }
-        .header p {
-            margin: 5px 0 0;
-            opacity: 0.9;
+        .hero-content h1 {
+            font-size: 36px;
+            color: #2e8c5a;
+            margin: 0 0 10px;
+        }
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .hero-image {
+            flex-basis: 300px;
+            height: 300px;
+            background: #eaf6ef;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2e8c5a;
+            font-weight: 500;
+            text-align: center;
+            border: 2px dashed #a5d6b9;
+        }
+        .download-button {
+            background: linear-gradient(135deg, #69b782, #2e8c5a);
+            color: white;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(46, 140, 90, 0.2);
         }
         .card {
             background: white;
             padding: 28px;
             border-radius: 16px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         }
         .card h2 {
             margin-top: 0;
-            font-size: 22px;
-            border-left: 4px solid #667eea;
+            font-size: 24px;
+            border-left: 4px solid #69b782;
             padding-left: 12px;
-        }
-        .card h3 {
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: #764ba2;
-        }
-        ul, ol {
-            padding-left: 20px;
-            line-height: 1.6;
-        }
-        ul li, ol li {
-            margin-bottom: 10px;
+            color: #2e8c5a;
         }
         .product-list li {
            list-style: none;
-           padding-left: 25px;
-           background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"%3E%3Cpath d="M22 11.08V12a10 10 0 1 1-5.93-9.14"%3E%3C/path%3E%3Cpolyline points="22 4 12 14.01 9 11.01"%3E%3C/polyline%3E%3C/svg%3E');
+           padding-left: 30px;
+           margin-bottom: 15px;
+           line-height: 1.5;
+           background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%232e8c5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolyline points="20 6 9 17 4 12"%3E%3C/polyline%3E%3C/svg%3E');
            background-repeat: no-repeat;
            background-position: left center;
            background-size: 20px;
         }
-        .download-card {
-            text-align: center;
-            background: #e9eafc;
-            border: 1px dashed #667eea;
-        }
-        .download-button {
-            background: #667eea;
-            color: white;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            max-width: 360px;
-            transition: background-color 0.2s;
-        }
-        .download-button:hover {
-            background-color: #5a6ed8;
-        }
-        .note {
-            font-size: 14px;
-            color: #555;
-            background: #f3f8ff;
-            padding: 14px;
-            border-left: 4px solid #4299e1;
-            margin-top: 15px;
-        }
         .partners {
             text-align: center;
+            margin-bottom: 20px;
             font-size: 14px;
             color: #888;
+        }
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-image {
+                width: 100%;
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -108,9 +114,20 @@
 
 <div class="wrapper">
 
-    <div class="header">
-        <h1>Quality Connect</h1>
-        <p>Official Beauty Quality Control Program</p>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Your Free Madagascar Centella Kit</h1>
+            <p>Participate in our official quality control program and receive a complimentary travel kit in exchange for your honest feedback.</p>
+            <button class="download-button" onclick="download()" id="btn">
+                Download Quality Connect App
+            </button>
+        </div>
+        <div class="hero-image">
+            <!-- Сюда можно вставить <img> с картинкой продукта -->
+            Your Product Image Here
+            <br>
+            (300x300)
+        </div>
     </div>
     
     <div class="partners">
@@ -118,55 +135,23 @@
     </div>
 
     <div class="card">
-        <h2>What You Receive</h2>
-        <p>As a qualified participant, you will receive one <strong>Madagascar Centella Travel Kit for FREE</strong>. The only requirement is your honest feedback.</p>
-        
-        <h3>Inside The Kit:</h3>
+        <h2>What's Inside The Kit</h2>
         <ul class="product-list">
             <li><strong>Centella Unscented Serum (30ml):</strong> Calms irritation and helps repair the skin barrier.</li>
             <li><strong>Centella Unscented Toner (30ml):</strong> Hydrates and prepares your skin for the next steps.</li>
             <li><strong>Centella Unscented Cream (30ml):</strong> Provides intensive, long-lasting moisture.</li>
             <li><strong>Centella Safe Sun SPF50+ (15ml):</strong> Protects your skin from harmful UV rays.</li>
         </ul>
-        <div class="note">
-            All products are free from fragrance, alcohol, and common irritants, making them perfect for sensitive skin. There are no fees, subscriptions, or credit card details required.
-        </div>
     </div>
 
     <div class="card">
         <h2>How It Works: 4 Simple Steps</h2>
         <ol>
-            <li><strong>Download the App:</strong> Get the official Quality Connect app using the download button below. This app is where you'll manage your participation.</li>
-            <li><strong>Generate QR Code:</strong> Inside the app, select the product set to generate your unique, one-time QR code.</li>
-            <li><strong>Claim at Partner Store:</strong> Visit a participating store (Watsons, SM Beauty/LOOK, Beauty Bar) and present your QR code to claim your free kit.</li>
-            <li><strong>Submit Your Review:</strong> After trying the products, record a simple, honest video review (30-60 seconds) and submit it through the app.</li>
+            <li><strong>Download the App:</strong> Get the official Quality Connect app using the download button above.</li>
+            <li><strong>Generate QR Code:</strong> Inside the app, generate your unique, one-time QR code.</li>
+            <li><strong>Claim at Partner Store:</strong> Visit a participating store and present your QR code to claim your free kit.</li>
+            <li><strong>Submit Your Review:</strong> After trying the products, record and submit a simple, honest video review (30-60 seconds) through the app.</li>
         </ol>
-    </div>
-
-    <div class="card">
-        <h2>About the App & Video Review</h2>
-        <h3>Quality Connect App</h3>
-        <p>This is our official feedback platform. It is a private application and not available on the App Store/Google Play to ensure it's used only by verified participants.</p>
-        <ul>
-            <li><strong>Safe & Secure:</strong> The app requires a one-time permission to install on Android, which is a standard and safe procedure for apps distributed this way.</li>
-            <li><strong>No Ads, No Payments:</strong> The app is completely free, with no ads, subscriptions, or payment requests.</li>
-        </ul>
-        
-        <h3>Video Review Guidelines</h3>
-        <p>Your honest opinion is what matters most. No need for professional quality!</p>
-        <ul>
-            <li><strong>Be Yourself:</strong> A simple selfie-style video is perfect.</li>
-            <li><strong>Content:</strong> Briefly introduce yourself (optional), show the products, and share your thoughts—both pros and cons are welcome.</li>
-            <li><strong>Length:</strong> 30 to 60 seconds is ideal.</li>
-        </ul>
-    </div>
-
-    <div class="card download-card">
-        <h2>Let's Get Started</h2>
-        <p>Click the button below to download the app and begin the process.</p>
-        <button class="download-button" onclick="download()" id="btn">
-            Download Quality Connect App
-        </button>
     </div>
 </div>
 
@@ -176,10 +161,10 @@
 
     if (!session) {
         const btn = document.getElementById("btn");
-        btn.innerText = "Session Expired - Please Go Back";
+        btn.innerText = "Session Expired";
         btn.disabled = true;
         btn.style.cursor = "not-allowed";
-        btn.style.backgroundColor = "#aaa";
+        btn.style.background = "#aaa";
     }
 
     function download() {
