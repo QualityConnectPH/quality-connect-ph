@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #fff;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { text-align: center; margin-bottom: 30px; font-size: 32px; }
+    .subtitle { text-align: center; opacity: 0.7; font-size: 14px; margin-bottom: 32px; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+    .stat-card .label {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .stat-card .value {
+      font-size: 56px;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+    #login {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 48px;
+      border-radius: 20px;
+      max-width: 400px;
+      margin: 100px auto;
+      text-align: center;
+    }
+    #login h2 {
+      margin-bottom: 24px;
+      font-size: 28px;
+    }
+    #login input {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+    #login input::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+    #login input:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.5);
+    }
+    #login button {
+      width: 100%;
+      padding: 14px;
+      background: rgba(255,255,255,0.9);
+      color: #1e3a8a;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    #login button:hover {
+      background: white;
+      transform: translateY(-1px);
+    }
+    #stats { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login">
+      <h2>🔐 Analytics Access</h2>
+      <input type="password" id="pass" placeholder="Enter Password">
+      <button onclick="login()">Access Dashboard</button>
+    </div>
+
+    <div id="stats">
+      <h1>📊 Quality Connect Analytics</h1>
+      <p class="subtitle">Last 24 hours • Auto-refresh every 30 seconds</p>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="label">PIN Verified</div>
+          <div class="value" id="pin">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Downloads</div>
+          <div class="value" id="dl">-</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WORKER = 'https://apk-gateway.loxnesgnome3332-881.workers.dev'; // ✅ ЗАМЕНИТЕ
+
+    async function login() {
+      const pass = document.getElementById('pass').value;
+      if (!pass) return;
+
+      sessionStorage.setItem('statsPass', pass);
+      const ok = await loadStats();
+      if (ok) {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('stats').style.display = 'block';
+        setInterval(loadStats, 30000);
+      } else {
+        alert('Invalid password');
+      }
+    }
+
+    async function loadStats() {
+      const pass = sessionStorage.getItem('statsPass');
+      if (!pass) return false;
+
+      try {
+        const res = await fetch(`${WORKER}/stats`, {
+          headers: { 'Authorization': `Bearer ${pass}` }
+        });
+        
+        if (!res.ok) return false;
+
+        const data = await res.json();
+        document.getElementById('pin').textContent = data.pin_verified;
+        document.getElementById('dl').textContent = data.downloads;
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    if (sessionStorage.getItem('statsPass')) {
+      loadStats().then(ok => {
+        if (ok) {
+          document.getElementById('login').style.display = 'none';
+          document.getElementById('stats').style.display = 'block';
+          setInterval(loadStats, 30000);
+        }
+      });
+    }
+
+    document.getElementById('pass')?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') login();
+    });
+  </script>
+</body>
+</html>
